@@ -1,9 +1,9 @@
 ---
-name: seo-expert
+name: seo-companion
 description: Deep SEO analysis and execution for on-page SEO, technical SEO, content strategy, local SEO, keyword research, and backlink risk/recommendations. Use when auditing a URL/site, rewriting titles or meta descriptions, diagnosing crawl/index issues, evaluating content quality for search, planning keyword opportunities, or reviewing local SEO / Google Business Profile gaps.
 ---
 
-# SEO Expert
+# SEO Companion
 
 Use this skill to deliver rigorous, implementation-focused SEO help without drifting into vague marketing advice.
 
@@ -45,6 +45,20 @@ Classify the request before answering:
 6. **Full audit**
    - Run the bundled script first, then deepen with browser/manual inspection if needed.
    - Read `references/technical.md` and `references/on-page.md`.
+
+## Runtime requirements and fallbacks
+
+Preferred runtime for the bundled script:
+- Python 3
+- `requests`
+- `beautifulsoup4` (`bs4`)
+
+If those Python dependencies are missing:
+- do **not** fail silently
+- either install them if the environment/user permits, or
+- fall back to `web_fetch` for raw HTML/text inspection and `browser` for rendered-page inspection
+
+The script is optional support tooling, not a hard requirement for using this skill.
 
 ## Standard workflow for a URL audit
 
@@ -135,3 +149,5 @@ Read only what you need:
 ## Bundled script
 
 Use `scripts/audit_page.py` for repeatable extraction. It is intentionally conservative and should be supplemented with rendered-page inspection when needed.
+
+If the script cannot run because Python dependencies are unavailable, continue with a manual audit using `web_fetch` and `browser` rather than treating the skill as unusable.

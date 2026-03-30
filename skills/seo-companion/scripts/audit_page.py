@@ -5,8 +5,23 @@ import sys
 from collections import Counter
 from urllib.parse import urljoin, urlparse
 
-import requests
-from bs4 import BeautifulSoup
+try:
+    import requests
+except ImportError:
+    print(
+        "Missing dependency: requests. Install it or fall back to web_fetch/browser for manual auditing.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
+
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    print(
+        "Missing dependency: beautifulsoup4 (bs4). Install it or fall back to web_fetch/browser for manual auditing.",
+        file=sys.stderr,
+    )
+    sys.exit(2)
 
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 TIMEOUT = 20
